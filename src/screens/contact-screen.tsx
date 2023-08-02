@@ -22,7 +22,7 @@ export const ContactScreen: FC<ContactProps> = ({route, navigation}) => {
     return null;
   }
 
-  const {givenName, phoneNumbers} = contact;
+  const {givenName, phoneNumbers, hasThumbnail, thumbnailPath} = contact;
 
   const onDelete = async () => {
     await Contacts.deleteContact(contact);
@@ -42,7 +42,11 @@ export const ContactScreen: FC<ContactProps> = ({route, navigation}) => {
   return (
     <View style={styles.container}>
       <Avatar
-        img={require('@src/assets/img/default-avatar.png')}
+        img={
+          hasThumbnail
+            ? {uri: thumbnailPath}
+            : require('@src/assets/img/default-avatar.png')
+        }
         width={180}
         height={180}
       />

@@ -3,8 +3,15 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {ContactScreen} from '@src/screens/contact-screen';
 import {ContactsListScreen} from '@src/screens/contacts-list-screen';
 import React from 'react';
-import {StatusBar, useColorScheme} from 'react-native';
+import {PermissionsAndroid, StatusBar, useColorScheme} from 'react-native';
 
+PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_CONTACTS).then(
+  async () => {
+    await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+    );
+  },
+);
 function App() {
   const Stack = createStackNavigator();
   const isDarkMode = useColorScheme() === 'dark';

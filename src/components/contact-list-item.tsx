@@ -18,7 +18,8 @@ export const ContactListItem: FC<ContactListItemProps> = ({
     });
   };
 
-  const {recordID, givenName, emailAddresses} = contact;
+  const {recordID, givenName, emailAddresses, hasThumbnail, thumbnailPath} =
+    contact;
 
   return (
     <TouchableOpacity
@@ -26,7 +27,11 @@ export const ContactListItem: FC<ContactListItemProps> = ({
       onPress={() => onContactPress(recordID)}>
       <View style={styles.avatarHolder}>
         <Avatar
-          img={require('@src/assets/img/default-avatar.png')}
+          img={
+            hasThumbnail
+              ? {uri: thumbnailPath}
+              : require('@src/assets/img/default-avatar.png')
+          }
           width={48}
           height={48}
         />

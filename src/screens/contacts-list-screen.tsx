@@ -17,12 +17,12 @@ type ContactsListScreenProps = {
 };
 
 export const ContactsListScreen: FC<ContactsListScreenProps> = ({
+  route,
   navigation,
 }) => {
   const [contacts, setContacts] = useState<Contact[]>([]);
 
-  // @ts-ignore
-  const renderItem = ({item}) => (
+  const renderItem = ({item}: {item: Contact}) => (
     <ContactListItem contact={item} navigation={navigation} />
   );
 
@@ -41,7 +41,7 @@ export const ContactsListScreen: FC<ContactsListScreenProps> = ({
         setContacts(result);
       }
     })();
-  }, []);
+  }, [route.params?.id]);
 
   const onChange = async (text: string) => {
     const phoneNumberRegex =
